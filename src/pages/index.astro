@@ -1,0 +1,34 @@
+---
+// src/pages/index.astro
+---
+
+<html lang="es">
+  <head>
+    <title>Inicio | Biblioteca Hexagonal</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body
+    class="min-h-screen bg-gradient-to-br from-purple-100 via-white to-purple-200 flex items-center justify-center"
+  >
+    <main
+      class="text-center bg-white shadow-lg rounded-2xl p-10 max-w-lg w-full space-y-6"
+    >
+      <h1 class="text-4xl font-extrabold text-purple-700">📚 USPG</h1>
+      <p class="text-gray-600 text-lg">
+        Gestión de libros usando arquitectura hexagonal y Supabase
+      </p>
+      <p class="text-gray-500 text-sm">
+        Esta es una aplicación de ejemplo para demostrar la arquitectura
+        hexagonal y el uso de Supabase como backend.
+      </p>
+      <a
+        href="/libros"
+        class="inline-block bg-purple-600 text-white px-6 py-3 rounded-xl shadow hover:bg-purple-700 transition duration-200"
+      >
+        Ir a la sección de libros →
+      </a>
+    </main>
+  </body>
+</html>

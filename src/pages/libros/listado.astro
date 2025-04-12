@@ -1,0 +1,71 @@
+---
+import { LibroRepositorySupabase } from "@adapters/out/db/LibroRepositorySupabase";
+
+const repo = new LibroRepositorySupabase();
+const libros = await repo.findAll();
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Listado de Libros</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+
+  <body
+    class="min-h-screen bg-gradient-to-br from-purple-100 via-white to-purple-200 p-8"
+  >
+    <main class="max-w-6xl mx-auto bg-white shadow-xl rounded-xl p-8">
+      <h1 class="text-3xl font-bold mb-6 text-purple-700 text-center">
+        📚 Listado de Libros
+      </h1>
+
+      <table
+        class="min-w-full table-auto border-collapse border border-gray-300"
+      >
+        <thead class="bg-purple-100">
+          <tr>
+            <th class="border border-gray-300 px-4 py-2">Nombre</th>
+            <th class="border border-gray-300 px-4 py-2">Descripción</th>
+            <th class="border border-gray-300 px-4 py-2">Categoría</th>
+            <th class="border border-gray-300 px-4 py-2">Autor</th>
+            <th class="border border-gray-300 px-4 py-2">Publicado</th>
+            <th class="border border-gray-300 px-4 py-2">Costo</th>
+            <th class="border border-gray-300 px-4 py-2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            libros.map((libro) => (
+              <tr class="hover:bg-gray-100">
+                <td class="border px-4 py-2">{libro.name}</td>
+                <td class="border px-4 py-2">{libro.descripcion}</td>
+                <td class="border px-4 py-2">{libro.categoria}</td>
+                <td class="border px-4 py-2">{libro.author}</td>
+                <td class="border px-4 py-2">
+                  {libro.datePublish.toLocaleDateString()}
+                </td>
+                <td class="border px-4 py-2">Q{libro.cost}</td>
+                <td class="border px-4 py-2 space-x-2">
+                  <button class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500">
+                    Editar
+                  </button>
+                  <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+
+      <div class="mt-6 text-center">
+        <a href="/libros" class="text-purple-600 hover:underline"
+          >← Volver al formulario</a
+        >
+      </div>
+    </main>
+  </body>
+</html>
