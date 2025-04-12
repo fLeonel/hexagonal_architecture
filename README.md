@@ -108,6 +108,11 @@ Cada estudiante tiene su propio archivo `md` en `features/Autores/adapters/` com
 Inspirado en principios de arquitectura de software de Robert C. Martin (Uncle Bob), usando un enfoque **Domain-Driven** y **hexagonal** para un aprendizaje práctico en desarrollo moderno.
 
 ---
+## 😎 Proyecto Adicional
+Se realizo en paralelo un desarrollo del mismo CRUD en el cual se interiorizo el funcionamiento y la implementacion de `Hexagonal Architecture`, a cargo de **Luis Reyes**.
+[Ver proyecto](https://github.com/LuisAlfred1/HexagonalCrudNet.git)
+
+--- 
 
 ## 👥 Colaboradores
 
