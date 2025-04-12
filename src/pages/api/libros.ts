@@ -12,10 +12,10 @@ export async function POST({ request }: { request: Request }) {
     const body = {
       id: uuidv4(),
       name: raw.name,
-      description: raw.descripcion,
+      description: raw.description,
       categoria: raw.categoria,
       author: raw.author,
-      costo: Number(raw.cost),
+      costo: Number(raw.costo),
       datePublish: new Date(raw.date_publish),
     };
 

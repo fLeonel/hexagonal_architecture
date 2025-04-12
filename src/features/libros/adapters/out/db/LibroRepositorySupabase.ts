@@ -8,11 +8,11 @@ export class LibroRepositorySupabase implements LibroRepository {
     const { error } = await supabase.from("libros").insert({
       id: libro.id,
       name: libro.name,
-      description: libro.descripcion,
+      description: libro.description,
       categoria: libro.categoria,
       date_publish: libro.datePublish.toISOString(),
       author: libro.author,
-      costo: libro.cost,
+      costo: libro.costo,
     });
 
     if (error) throw new Error(error.message);

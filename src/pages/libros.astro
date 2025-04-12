@@ -1,5 +1,8 @@
 ---
-// src/pages/libros.astro
+import { LibroRepositorySupabase } from "@adapters/out/db/LibroRepositorySupabase";
+
+const repo = new LibroRepositorySupabase();
+const libros = await repo.findAll();
 ---
 
 <html lang="es">
@@ -12,7 +15,6 @@
   <body
     class="min-h-screen bg-gradient-to-br from-purple-100 via-white to-purple-200 flex items-center justify-center"
   >
-    <!-- 👇 NO method ni action -->
     <form
       id="libroForm"
       novalidate
@@ -71,12 +73,19 @@
       >
         Crear Libro
       </button>
-      <div class="text-center mt-4">
+
+      <div class="flex flex-col gap-2 text-center mt-4">
         <a
           href="/libros/listado"
           class="text-sm text-purple-600 underline hover:text-purple-800"
         >
           → Ver listado de libros
+        </a>
+        <a
+          href="/"
+          class="text-sm text-purple-600 underline hover:text-purple-800"
+        >
+          ← Volver a la vista principal
         </a>
       </div>
     </form>
@@ -88,7 +97,6 @@
         e.preventDefault();
 
         const data = Object.fromEntries(new FormData(form));
-        console.log("📤 Data", data);
 
         const res = await fetch("/api/libros", {
           method: "POST",
@@ -97,11 +105,9 @@
             Accept: "application/json",
           },
           body: JSON.stringify(data),
-          mode: "cors",
         });
 
         const result = await res.json();
-        console.log("🛰️ Respuesta:", result);
 
         if (result.success) {
           alert("📚 Libro creado exitosamente!");

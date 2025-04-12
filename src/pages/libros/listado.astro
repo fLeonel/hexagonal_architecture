@@ -40,13 +40,13 @@ const libros = await repo.findAll();
             libros.map((libro) => (
               <tr class="hover:bg-gray-100" data-id={libro.id}>
                 <td class="border px-4 py-2">{libro.name}</td>
-                <td class="border px-4 py-2">{libro.descripcion}</td>
+                <td class="border px-4 py-2">{libro.description}</td>
                 <td class="border px-4 py-2">{libro.categoria}</td>
                 <td class="border px-4 py-2">{libro.author}</td>
                 <td class="border px-4 py-2">
                   {libro.datePublish.toLocaleDateString()}
                 </td>
-                <td class="border px-4 py-2">Q{libro.cost}</td>
+                <td class="border px-4 py-2">Q{libro.costo}</td>
                 <td class="border px-4 py-2 space-x-2">
                   <button class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500">
                     Editar
