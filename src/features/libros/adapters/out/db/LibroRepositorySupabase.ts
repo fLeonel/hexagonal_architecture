@@ -4,12 +4,6 @@ import { LibroRepository } from "@ports/out/libroRepository";
 import { supabase } from "../../../../../shared/database/supabase";
 
 export class LibroRepositorySupabase implements LibroRepository {
-  update(libro: Libro): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
-  delete(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
   async save(libro: Libro): Promise<void> {
     const { error } = await supabase.from("libros").insert({
       id: libro.id,
@@ -20,6 +14,28 @@ export class LibroRepositorySupabase implements LibroRepository {
       author: libro.author,
       costo: libro.cost,
     });
+
+    if (error) throw new Error(error.message);
+  }
+
+  async update(libro: Libro): Promise<void> {
+    const { error } = await supabase
+      .from("libros")
+      .update({
+        name: libro.name,
+        description: libro.descripcion,
+        categoria: libro.categoria,
+        date_publish: libro.datePublish.toISOString(),
+        author: libro.author,
+        costo: libro.cost,
+      })
+      .eq("id", libro.id);
+
+    if (error) throw new Error(error.message);
+  }
+
+  async delete(id: string): Promise<void> {
+    const { error } = await supabase.from("libros").delete().eq("id", id);
 
     if (error) throw new Error(error.message);
   }
@@ -43,6 +59,7 @@ export class LibroRepositorySupabase implements LibroRepository {
       data.costo
     );
   }
+
   async findAll(): Promise<Libro[]> {
     const { data, error } = await supabase.from("libros").select("*");
 
