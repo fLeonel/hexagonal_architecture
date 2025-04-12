@@ -7,6 +7,6 @@ export class Libro {
     public categoria: string,
     public datePublish: Date,
     public author: string,
-    public cost: number
+    public costo: number
   ) {}
 }

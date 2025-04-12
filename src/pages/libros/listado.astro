@@ -38,7 +38,7 @@ const libros = await repo.findAll();
         <tbody>
           {
             libros.map((libro) => (
-              <tr class="hover:bg-gray-100">
+              <tr class="hover:bg-gray-100" data-id={libro.id}>
                 <td class="border px-4 py-2">{libro.name}</td>
                 <td class="border px-4 py-2">{libro.descripcion}</td>
                 <td class="border px-4 py-2">{libro.categoria}</td>
@@ -62,10 +62,99 @@ const libros = await repo.findAll();
       </table>
 
       <div class="mt-6 text-center">
-        <a href="/libros" class="text-purple-600 hover:underline"
-          >← Volver al formulario</a
-        >
+        <a href="/libros" class="text-purple-600 hover:underline">
+          ← Volver al formulario
+        </a>
       </div>
     </main>
+
+    <script type="module">
+      const deleteButtons = document.querySelectorAll("button.bg-red-500");
+
+      deleteButtons.forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const row = btn.closest("tr");
+          const id = row?.dataset?.id;
+
+          if (confirm("¿Seguro que querés eliminar este libro?")) {
+            const res = await fetch(`/api/libros/${id}`, {
+              method: "DELETE",
+            });
+
+            const result = await res.json();
+            if (result.success) {
+              alert("📕 Libro eliminado correctamente");
+              row.remove();
+            } else {
+              alert("❌ Error al eliminar el libro");
+            }
+          }
+        });
+      });
+
+      const editButtons = document.querySelectorAll("button.bg-yellow-400");
+
+      editButtons.forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const row = btn.closest("tr");
+          const id = row?.dataset?.id;
+
+          const name = prompt("Nuevo nombre:", row.children[0].textContent);
+          const description = prompt(
+            "Nueva descripción:",
+            row.children[1].textContent
+          );
+          const categoria = prompt(
+            "Nueva categoría:",
+            row.children[2].textContent
+          );
+          const author = prompt("Nuevo autor:", row.children[3].textContent);
+          const date_publish = prompt(
+            "Nueva fecha de publicación (YYYY-MM-DD):",
+            row.children[4].textContent
+          );
+          const costo = prompt(
+            "Nuevo costo:",
+            row.children[5].textContent.replace("Q", "")
+          );
+
+          if (
+            !name ||
+            !description ||
+            !categoria ||
+            !author ||
+            !date_publish ||
+            !costo
+          ) {
+            alert("❌ Todos los campos son requeridos");
+            return;
+          }
+
+          const res = await fetch(`/api/libros/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              description,
+              categoria,
+              author,
+              date_publish,
+              costo,
+            }),
+          });
+
+          const result = await res.json();
+          if (result.success) {
+            alert("✏️ Libro actualizado correctamente");
+            location.reload();
+          } else {
+            alert("❌ Hubo un error al actualizar el libro");
+            console.error(result.error);
+          }
+        });
+      });
+    </script>
   </body>
 </html>
