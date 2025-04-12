@@ -119,5 +119,5 @@ Inspirado en principios de arquitectura de software de Robert C. Martin (Uncle B
 
 ## 📸 Diagramas
 
-![Diagrama de arquitectura CRUD](diagrama_luis.jpg)
-![Hexagonal Architecture](hexagonal_architecture.webp)
+![Diagrama de arquitectura CRUD](./public/diagrama_luis.jpg)
+![Hexagonal Architecture](./public/hexagonal_architecture.webp)
