@@ -23,6 +23,12 @@ export class UpdateLibro {
       data.costo
     );
 
+<<<<<<< HEAD
     await this.repo.update(libro);
   }
 }
+=======
+    await this.repo.save(libro);
+  }
+}
+>>>>>>> 2357333a5ab303318a4f9880845266bf481e1eb1
