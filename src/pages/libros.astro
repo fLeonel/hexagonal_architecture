@@ -12,8 +12,10 @@
   <body
     class="min-h-screen bg-gradient-to-br from-purple-100 via-white to-purple-200 flex items-center justify-center"
   >
+    <!-- 👇 NO method ni action -->
     <form
       id="libroForm"
+      novalidate
       class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md space-y-4 mt-10"
     >
       <h2 class="text-3xl font-bold text-center text-purple-700">
@@ -81,10 +83,13 @@
 
     <script type="module">
       const form = document.querySelector("#libroForm");
+
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
         const data = Object.fromEntries(new FormData(form));
-        console.log("Data", data);
+        console.log("📤 Data", data);
+
         const res = await fetch("/api/libros", {
           method: "POST",
           headers: {
@@ -96,7 +101,8 @@
         });
 
         const result = await res.json();
-        console.log("Testing", result);
+        console.log("🛰️ Respuesta:", result);
+
         if (result.success) {
           alert("📚 Libro creado exitosamente!");
           form.reset();
