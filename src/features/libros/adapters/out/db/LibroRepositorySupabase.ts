@@ -23,11 +23,11 @@ export class LibroRepositorySupabase implements LibroRepository {
       .from("libros")
       .update({
         name: libro.name,
-        description: libro.descripcion,
+        description: libro.description,
         categoria: libro.categoria,
         date_publish: libro.datePublish.toISOString(),
         author: libro.author,
-        costo: libro.cost,
+        costo: libro.costo,
       })
       .eq("id", libro.id);
 
